@@ -14,37 +14,65 @@ jobs:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'fmt'
         env:
+<<<<<<< HEAD
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
           GITHUB_TOKEN: ${{ secrets.client_id }}
           GITHUB_TOKEN: ${{ secrets.client_secret }}
+=======
+          ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
+          ARM_TENANT_ID: ${{ secrets.tenant_id }}
+          ARM_CLIENT_ID: ${{ secrets.client_id }}
+          ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+>>>>>>> updated with new envs
       - name: 'Terraform Init'
         uses: evry-ace/devops-training-omega@development
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'init'
         env:
+<<<<<<< HEAD
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
           GITHUB_TOKEN: ${{ secrets.client_id }}
           GITHUB_TOKEN: ${{ secrets.client_secret }}
+=======
+          ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
+          ARM_TENANT_ID: ${{ secrets.tenant_id }}
+          ARM_CLIENT_ID: ${{ secrets.client_id }}
+          ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+>>>>>>> updated with new envs
       - name: 'Terraform Validate'
         uses: evry-ace/devops-training-omega@development
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'validate'
         env:
+<<<<<<< HEAD
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
           GITHUB_TOKEN: ${{ secrets.client_id }}
           GITHUB_TOKEN: ${{ secrets.client_secret }}
+=======
+          ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
+          ARM_TENANT_ID: ${{ secrets.tenant_id }}
+          ARM_CLIENT_ID: ${{ secrets.client_id }}
+          ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+>>>>>>> updated with new envs
       - name: 'Terraform Plan'
         uses: evry-ace/devops-training-omega@development
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'plan'
         env:
+<<<<<<< HEAD
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
           GITHUB_TOKEN: ${{ secrets.client_id }}
           GITHUB_TOKEN: ${{ secrets.client_secret }}
+=======
+          ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
+          ARM_TENANT_ID: ${{ secrets.tenant_id }}
+          ARM_CLIENT_ID: ${{ secrets.client_id }}
+          ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+>>>>>>> updated with new envs
