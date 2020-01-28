@@ -48,13 +48,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
           GITHUB_TOKEN: ${{ secrets.client_id }}
           GITHUB_TOKEN: ${{ secrets.client_secret }}
-      - name: 'Terraform Apply'
-        uses: evry-ace/devops-training-omega@master
-        with:
-          tf_actions_version: 0.12.13
-          tf_actions_subcommand: 'apply -auto-approve'
-        env:
-          GITHUB_TOKEN: ${{ secrets.subscription_id }}
-          GITHUB_TOKEN: ${{ secrets.tenant_id }}
-          GITHUB_TOKEN: ${{ secrets.client_id }}
-          GITHUB_TOKEN: ${{ secrets.client_secret }}
