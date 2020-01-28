@@ -16,10 +16,10 @@ jobs:
           tf_actions_working_dir: '.'
           tf_actions_comment: true
         env:
-          ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
-          ARM_TENANT_ID: ${{ secrets.tenant_id }}
-          ARM_CLIENT_ID: ${{ secrets.client_id }}
-          ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
       - name: 'Terraform Init'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -28,10 +28,10 @@ jobs:
           tf_actions_working_dir: '.'
           tf_actions_comment: true
         env:
-          ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
-          ARM_TENANT_ID: ${{ secrets.tenant_id }}
-          ARM_CLIENT_ID: ${{ secrets.client_id }}
-          ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
       - name: 'Terraform Validate'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -40,10 +40,10 @@ jobs:
           tf_actions_working_dir: '.'
           tf_actions_comment: true
         env:
-          ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
-          ARM_TENANT_ID: ${{ secrets.tenant_id }}
-          ARM_CLIENT_ID: ${{ secrets.client_id }}
-          ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
       - name: 'Terraform Plan'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -52,7 +52,7 @@ jobs:
           tf_actions_working_dir: '.'
           tf_actions_comment: true
         env:
-          ARM_SUBSCRIPTION_ID: ${{ secrets.subscription_id }}
-          ARM_TENANT_ID: ${{ secrets.tenant_id }}
-          ARM_CLIENT_ID: ${{ secrets.client_id }}
-          ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
