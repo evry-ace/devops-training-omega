@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@development
+        uses: evry-ace/devops-training-omega@development
       - name: 'Terraform Format'
         uses: evry-ace/devops-training-omega@development
         with:
