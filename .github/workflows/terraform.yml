@@ -16,6 +16,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
+          GITHUB_TOKEN: ${{ secrets.client_id }}
+          GITHUB_TOKEN: ${{ secrets.client_secret }}
+          GITHUB_TOKEN: ${{ secrets.client_id }}
+          GITHUB_TOKEN: ${{ secrets.client_secret }}
       - name: 'Terraform Init'
         uses: evry-ace/devops-training-omega@development
         with:
@@ -24,6 +28,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
+          GITHUB_TOKEN: ${{ secrets.client_id }}
+          GITHUB_TOKEN: ${{ secrets.client_secret }}
       - name: 'Terraform Validate'
         uses: evry-ace/devops-training-omega@development
         with:
@@ -32,6 +38,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
+          GITHUB_TOKEN: ${{ secrets.client_id }}
+          GITHUB_TOKEN: ${{ secrets.client_secret }}
       - name: 'Terraform Plan'
         uses: evry-ace/devops-training-omega@development
         with:
@@ -40,6 +48,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
+          GITHUB_TOKEN: ${{ secrets.client_id }}
+          GITHUB_TOKEN: ${{ secrets.client_secret }}
       - name: 'Terraform Apply'
         uses: evry-ace/devops-training-omega@master
         with:
@@ -48,3 +58,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.subscription_id }}
           GITHUB_TOKEN: ${{ secrets.tenant_id }}
+          GITHUB_TOKEN: ${{ secrets.client_id }}
+          GITHUB_TOKEN: ${{ secrets.client_secret }}
