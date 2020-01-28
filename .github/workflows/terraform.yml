@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
-        uses: evry-ace/devops-training-omega@master
+        uses: hashicorp/terraform-github-actions@master
       - name: 'Terraform Format'
-        uses: evry-ace/devops-training-omega@master
+        uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'fmt'
@@ -19,7 +19,7 @@ jobs:
           ARM_CLIENT_ID: ${{ secrets.client_id }}
           ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
       - name: 'Terraform Init'
-        uses: evry-ace/devops-training-omega@master
+        uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'init'
@@ -29,7 +29,7 @@ jobs:
           ARM_CLIENT_ID: ${{ secrets.client_id }}
           ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
       - name: 'Terraform Validate'
-        uses: evry-ace/devops-training-omega@master
+        uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'validate'
@@ -39,7 +39,7 @@ jobs:
           ARM_CLIENT_ID: ${{ secrets.client_id }}
           ARM_CLIENT_SECRET: ${{ secrets.client_secret }}
       - name: 'Terraform Plan'
-        uses: evry-ace/devops-training-omega@master
+        uses: hashicorp/terraform-github-actions@master
         with:
           tf_actions_version: 0.12.13
           tf_actions_subcommand: 'plan'
