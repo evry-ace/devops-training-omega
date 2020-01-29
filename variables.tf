@@ -1,4 +1,4 @@
-/*
+
 variable "subscription_id" {
   type    = string
   default = "ARM_SUBSCRIPTION_ID"
@@ -18,5 +18,3 @@ variable "tenant_id" {
   type    = string
   default = "ARM_TENANT_ID"
 }
-
-*/
