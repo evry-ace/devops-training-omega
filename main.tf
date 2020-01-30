@@ -152,29 +152,29 @@ resource "azurerm_virtual_machine" "omegavm" {
     storage_image_reference {
         publisher = "Canonical"
         offer     = "UbuntuServer"
-        sku       = "16.04.0-LTS"
+        sku       = "18.04-LTS"
         version   = "latest"
     }
 
     os_profile {
-        computer_name  = "myvm"
-        admin_username = "azureuser"
+        computer_name  = "darkstar"
+        admin_username = "olebole"
     }
 
     os_profile_linux_config {
         disable_password_authentication = true
         ssh_keys {
-            path     = "/home/azureuser/.ssh/authorized_keys"
-            key_data = "ssh-rsa AAAAB3Nz{snip}hwhqT9h"
+            path     = "/home/olebole/.ssh/authorized_keys"
+            key_data = "ssh-rsa here..."
         }
     }
 
     boot_diagnostics {
         enabled     = "true"
-        storage_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
+        storage_uri = azurerm_storage_account.omegastorageaccount.primary_blob_endpoint
     }
 
     tags = {
-        environment = "Terraform Demo"
+        environment = "assignment"
     }
 }
