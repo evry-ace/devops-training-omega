@@ -30,11 +30,27 @@ resource "azurerm_virtual_network" "omegavnet" {
 }
 
 # Create subnet
-resource "azurerm_subnet" "omegasubnet" {
-    name                 = "omegaSubnet"
+resource "azurerm_subnet" "frontend" {
+    name                 = "omegafront"
     resource_group_name  = azurerm_resource_group.example.name
-    virtual_network_name = azurerm_virtual_network.omegaVnet.name
+    virtual_network_name = azurerm_virtual_network.omegavnet.name
     address_prefix       = "10.0.1.0/24"
+}
+
+# Create subnet
+resource "azurerm_subnet" "backend" {
+    name                 = "omegaback"
+    resource_group_name  = azurerm_resource_group.example.name
+    virtual_network_name = azurerm_virtual_network.omegavnet.name
+    address_prefix       = "10.0.2.0/24"
+}
+
+# Create subnet
+resource "azurerm_subnet" "db" {
+    name                 = "omegadb"
+    resource_group_name  = azurerm_resource_group.example.name
+    virtual_network_name = azurerm_virtual_network.omegavnet.name
+    address_prefix       = "10.0.3.0/24"
 }
 
 # Create public IPs
@@ -104,7 +120,7 @@ resource "azurerm_network_interface" "omeganic" {
 
     ip_configuration {
         name                          = "omegaNicConfiguration"
-        subnet_id                     = azurerm_subnet.omegasubnet.id
+        subnet_id                     = azurerm_subnet.frontend.id
         private_ip_address_allocation = "Dynamic"
         public_ip_address_id          = azurerm_public_ip.omegapublicip.id
     }
