@@ -16,7 +16,7 @@ terraform {
 
 # Create a resource group
 resource "azurerm_resource_group" "example" {
-  name     = "production"
+  name     = "devops-training-omega"
   location = "westeurope"
 
   tags = {
