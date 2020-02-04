@@ -7,12 +7,16 @@ provider "azurerm" {
 
 }
 
+# State of infrastructure in terraform cloud. 
+
 terraform {
   backend "atlas" {
     name = "devops-training-omega/front-end-vm1"
     address = "https://app.terraform.io" # optional
   }
 }
+
+# data source for RG
 
 data "azurerm_resource_group" "example" {
   name = "production"
