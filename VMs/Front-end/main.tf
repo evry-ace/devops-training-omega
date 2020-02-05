@@ -24,6 +24,8 @@ tags = {
     team = "devops-training-omega"
 }
 
+}
+
 data "azurerm_resource_group" "rg" {
   name = "devops-training-omega"
 }
@@ -37,7 +39,7 @@ resource "azurerm_public_ip" "omegapublicip" {
 
   tags = local.tags 
 
-  }
+  
 }
 
 resource "azurerm_network_security_group" "omegansg" {
@@ -83,7 +85,7 @@ resource "azurerm_network_security_group" "omegansg" {
 
   tags = local.tags
 
-  }
+  
 }
 
 # Create network interface
@@ -102,7 +104,7 @@ resource "azurerm_network_interface" "omeganic" {
 
   tags = local.tags
 
-  }
+  
 }
 
 # Random for storage account
@@ -123,7 +125,7 @@ resource "azurerm_storage_account" "omegastorageaccount" {
 
   tags = local.tags
   
-  }
+  
 }
 
 resource "azurerm_virtual_machine" "omegavm" {
@@ -167,5 +169,5 @@ resource "azurerm_virtual_machine" "omegavm" {
 
   tags = local.tags
 
-  }
+  
 }
