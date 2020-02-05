@@ -15,7 +15,7 @@ terraform {
     organization = "omega-devops"
 
     workspaces {
-      name = "devops-training-omega/network"
+      name = "devops-training-omega-network"
     }
   }
 }
