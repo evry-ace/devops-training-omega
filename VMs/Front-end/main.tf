@@ -8,14 +8,18 @@ provider "azurerm" {
 }
 
 terraform {
-  backend "atlas" {
-    name = "devops-training-omega/rg/"
-    address = "https://app.terraform.io" # optional
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "omega-devops"
+
+    workspaces {
+      name = "devops-training-omega-front-end-vm1"
+    }
   }
 }
 
 data "azurerm_resource_group" "example" {
-  name = "production"
+  name = "devops-training-omega"
 }
 
 # Create public IPs
