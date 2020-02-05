@@ -10,9 +10,13 @@ provider "azurerm" {
 # State of infrastructure in terraform cloud. 
 
 terraform {
-  backend "atlas" {
-    name = "devops-training-omega/network"
-    address = "https://app.terraform.io" # optional
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "omega-devops"
+
+    workspaces {
+      name = "devops-training-omega/network"
+    }
   }
 }
 
@@ -26,36 +30,36 @@ data "azurerm_resource_group" "example" {
 
 
 resource "azurerm_virtual_network" "omegavnet" {
-    name                = "omegaVnet"
-    address_space       = ["10.0.0.0/16"]
-    location            = "westeurope"
-    resource_group_name = azurerm_resource_group.example.name
+  name                = "omegaVnet"
+  address_space       = ["10.0.0.0/16"]
+  location            = "westeurope"
+  resource_group_name = azurerm_resource_group.example.name
 
-    tags = {
-        environment = "assignment"
-    }
+  tags = {
+    environment = "assignment"
+  }
 }
 
 # Create subnet
 resource "azurerm_subnet" "frontend" {
-    name                 = "omegafront"
-    resource_group_name  = data.azurerm_resource_group.example.name
-    virtual_network_name = azurerm_virtual_network.omegavnet.name
-    address_prefix       = "10.0.1.0/24"
+  name                 = "omegafront"
+  resource_group_name  = data.azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.omegavnet.name
+  address_prefix       = "10.0.1.0/24"
 }
 
 # Create subnet
 resource "azurerm_subnet" "backend" {
-    name                 = "omegaback"
-    resource_group_name  = data.azurerm_resource_group.example.name
-    virtual_network_name = azurerm_virtual_network.omegavnet.name
-    address_prefix       = "10.0.2.0/24"
+  name                 = "omegaback"
+  resource_group_name  = data.azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.omegavnet.name
+  address_prefix       = "10.0.2.0/24"
 }
 
 # Create subnet
 resource "azurerm_subnet" "db" {
-    name                 = "omegadb"
-    resource_group_name  = data.azurerm_resource_group.example.name
-    virtual_network_name = azurerm_virtual_network.omegavnet.name
-    address_prefix       = "10.0.3.0/24"
+  name                 = "omegadb"
+  resource_group_name  = data.azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.omegavnet.name
+  address_prefix       = "10.0.3.0/24"
 }
