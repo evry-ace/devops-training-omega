@@ -11,7 +11,7 @@ provider "azurerm" {
 
 terraform {
   backend "atlas" {
-    name = "devops-training-omega/front-end-vm1"
+    name = "devops-training-omega/network"
     address = "https://app.terraform.io" # optional
   }
 }
