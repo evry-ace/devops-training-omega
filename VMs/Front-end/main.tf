@@ -5,6 +5,7 @@ provider "azurerm" {
   client_secret   = var.client_secret
   tenant_id       = var.tenant_id
 
+  features {}
 }
 
 terraform {
@@ -20,28 +21,30 @@ terraform {
 
 locals {
 
-tags = {
+  tags = {
     team = "devops-training-omega"
-}
+  }
 
 }
+
+
 
 data "azurerm_resource_group" "rg" {
   name = "devops-training-omega"
 }
 
-# Create public IPs
-resource "azurerm_public_ip" "omegapublicip" {
-  name                = "omegaPublicIP"
-  location            = "westeurope"
-  resource_group_name = data.azurerm_resource_group.rg.name
-  allocation_method   = "Dynamic"
+#data "azurerm_virtual_network" "vnet" {
+#  name                = "production"
+#  resource_group_name = data.azurerm_resource_group.rg.name
+#}
 
-  tags = local.tags 
-
-  
+data "azurerm_subnet" "frontend" {
+  name                 = "omegafront"
+  virtual_network_name = "omegaVnet"
+  resource_group_name  = data.azurerm_resource_group.rg.name
 }
 
+/*
 resource "azurerm_network_security_group" "omegansg" {
   name                = "omegaNetworkSecurityGroup"
   location            = "westeurope"
@@ -85,27 +88,10 @@ resource "azurerm_network_security_group" "omegansg" {
 
   tags = local.tags
 
-  
+
 }
+*/
 
-# Create network interface
-resource "azurerm_network_interface" "omeganic" {
-  name                      = "omegaNIC"
-  location                  = "westeurope"
-  resource_group_name       = data.azurerm_resource_group.rg.name
-  network_security_group_id = azurerm_network_security_group.omegansg.id
-
-  ip_configuration {
-    name                          = "omegaNicConfiguration"
-    subnet_id                     = azurerm_subnet.frontend.id
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.omegapublicip.id
-  }
-
-  tags = local.tags
-
-  
-}
 
 # Random for storage account
 resource "random_id" "randomId" {
@@ -124,50 +110,40 @@ resource "azurerm_storage_account" "omegastorageaccount" {
   account_tier             = "Standard"
 
   tags = local.tags
-  
-  
+
+
 }
 
-resource "azurerm_virtual_machine" "omegavm" {
-  name                  = "darkstar"
-  location              = "westeurope"
-  resource_group_name   = data.azurerm_resource_group.rg.name
-  network_interface_ids = [azurerm_network_interface.omeganic.id]
-  vm_size               = "Standard_A1_v2"
+resource "azurerm_linux_virtual_machine_scale_set" "main" {
+  name                            = "${var.prefix}-vmss"
+  resource_group_name             = data.azurerm_resource_group.rg.name
+  location                        = data.azurerm_resource_group.rg.location
+  sku                             = "Standard_B1ms"
+  instances                       = 3
+  admin_username                  = "adminuser"
+  admin_password                  = "P@ssw0rd1234!"
+  disable_password_authentication = false
 
-  storage_os_disk {
-    name              = "myOsDisk"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Premium_LRS"
-  }
-
-  storage_image_reference {
+  source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    sku       = "16.04-LTS"
     version   = "latest"
   }
 
-  os_profile {
-    computer_name  = "darkstar"
-    admin_username = "olebole"
-  }
+  network_interface {
+    name    = "frnic"
+    primary = true
 
-  os_profile_linux_config {
-    disable_password_authentication = true
-    ssh_keys {
-      path     = "/home/olebole/.ssh/authorized_keys"
-      key_data = "ssh-rsa here..."
+    ip_configuration {
+      name      = "internal"
+      primary   = true
+      subnet_id = data.azurerm_subnet.frontend.id
     }
   }
 
-  boot_diagnostics {
-    enabled     = "true"
-    storage_uri = azurerm_storage_account.omegastorageaccount.primary_blob_endpoint
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
   }
-
-  tags = local.tags
-
-  
 }
