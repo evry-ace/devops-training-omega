@@ -44,53 +44,7 @@ data "azurerm_subnet" "frontend" {
   resource_group_name  = data.azurerm_resource_group.rg.name
 }
 
-/*
-resource "azurerm_network_security_group" "omegansg" {
-  name                = "omegaNetworkSecurityGroup"
-  location            = "westeurope"
-  resource_group_name = data.azurerm_resource_group.rg.name
 
-  security_rule {
-    name                       = "SSH"
-    priority                   = 120
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Port_80"
-    priority                   = 110
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "80"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Port_5432"
-    priority                   = 150
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "5432"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-
-  tags = local.tags
-
-
-}
-*/
 
 
 # Random for storage account
@@ -114,7 +68,28 @@ resource "azurerm_storage_account" "omegastorageaccount" {
 
 }
 
-resource "azurerm_linux_virtual_machine_scale_set" "main" {
+#Front-end LB
+
+resource "azurerm_lb" "front-lb" {
+  name                = "omega-front-lb"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  sku                 = "Basic"
+  frontend_ip_configuration {
+    name                          = "omega-front-ip-conf"
+    subnet_id                     = data.azurerm_subnet.frontend.id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.2.5"
+  }
+}
+
+resource "azurerm_lb_backend_address_pool" "front-end-address-pool" {
+  resource_group_name = data.azurerm_resource_group.rg.name
+  loadbalancer_id     = azurerm_lb.front-lb.id
+  name                = "backendaddresspool"
+}
+
+resource "azurerm_linux_virtual_machine_scale_set" "frontendvmss" {
   name                            = "${var.prefix}-vmss"
   resource_group_name             = data.azurerm_resource_group.rg.name
   location                        = data.azurerm_resource_group.rg.location
