@@ -58,6 +58,25 @@ resource "azurerm_storage_account" "omegastorageaccount" {
 
 }
 
+resource "azurerm_lb" "back-lb" {
+  name                = "omega-back-lb"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  sku                 = "Basic"
+  frontend_ip_configuration {
+    name                          = "omega-back-ip-conf"
+    subnet_id                     = data.azurerm_subnet.frontend.id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.2.5"
+  }
+}
+
+resource "azurerm_lb_backend_address_pool" "back-end-address-pool" {
+  resource_group_name = data.azurerm_resource_group.rg.name
+  loadbalancer_id     = azurerm_lb.back-lb.id
+  name                = "backendaddresspool"
+}
+
 resource "azurerm_linux_virtual_machine_scale_set" "backendvmss" {
   name                            = "${var.prefix}-vmss"
   resource_group_name             = data.azurerm_resource_group.rg.name
