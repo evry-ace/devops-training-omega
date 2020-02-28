@@ -65,7 +65,7 @@ resource "azurerm_lb" "back-lb" {
   sku                 = "Basic"
   frontend_ip_configuration {
     name                          = "omega-back-ip-conf"
-    subnet_id                     = data.azurerm_subnet.frontend.id
+    subnet_id                     = data.azurerm_subnet.backend.id
     private_ip_address_allocation = "Static"
     private_ip_address            = "10.0.2.5"
   }
