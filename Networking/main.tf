@@ -25,7 +25,7 @@ locals {
 tags = {
     team = "devops-training-omega"
 }
-
+}
 # data source for RG
 
 data "azurerm_resource_group" "rg" {
