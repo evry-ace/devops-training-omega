@@ -9,11 +9,11 @@ provider "azurerm" {
 
 terraform {
   backend "remote" {
-    hostname = "app.terraform.io"
+    hostname     = "app.terraform.io"
     organization = "omega-devops"
-    
+
     workspaces {
-        name = "devops-training-omega"
+      name = "devops-training-omega"
     }
   }
 }
