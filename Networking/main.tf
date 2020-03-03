@@ -1,5 +1,5 @@
 provider "azurerm" {
-
+  version         = "=1.44.0"
   subscription_id = var.subscription_id
   client_id       = var.client_id
   client_secret   = var.client_secret
@@ -22,10 +22,11 @@ terraform {
 
 locals {
 
-tags = {
+  tags = {
     team = "devops-training-omega"
-}
+  }
 
+}
 # data source for RG
 
 data "azurerm_resource_group" "rg" {
