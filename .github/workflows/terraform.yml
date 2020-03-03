@@ -15,7 +15,6 @@ jobs:
           tf_actions_subcommand: "fmt"
           tf_actions_working_dir: "."
           tf_actions_comment: true
-          args: '-backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=omega-devops"'
         env:
           GITHUB_TOKEN: ${{ secrets.ghpat }}
       - name: "Terraform Init"
