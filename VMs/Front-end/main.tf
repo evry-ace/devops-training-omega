@@ -79,14 +79,14 @@ resource "azurerm_lb" "front-lb" {
     name                          = "omega-front-ip-conf"
     subnet_id                     = data.azurerm_subnet.frontend.id
     private_ip_address_allocation = "Static"
-    private_ip_address            = "10.0.2.5"
+    private_ip_address            = "10.0.1.5"
   }
 }
 
 resource "azurerm_lb_backend_address_pool" "front-end-address-pool" {
   resource_group_name = data.azurerm_resource_group.rg.name
   loadbalancer_id     = azurerm_lb.front-lb.id
-  name                = "backendaddresspool"
+  name                = "frontendaddresspool"
 }
 
 resource "azurerm_linux_virtual_machine_scale_set" "frontendvmss" {
