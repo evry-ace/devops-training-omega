@@ -15,6 +15,7 @@ jobs:
           tf_actions_subcommand: "fmt"
           tf_actions_working_dir: "."
           tf_actions_comment: true
+          args: '-backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=omega-devops"'
         env:
           GITHUB_TOKEN: ${{ secrets.ghpat }}
       - name: "Terraform Init"
@@ -24,6 +25,7 @@ jobs:
           tf_actions_subcommand: "init"
           tf_actions_working_dir: "."
           tf_actions_comment: true
+          args: '-backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=omega-devops"'
         env:
           GITHUB_TOKEN: ${{ secrets.ghpat }}
       - name: "Terraform Validate"
@@ -33,6 +35,7 @@ jobs:
           tf_actions_subcommand: "validate"
           tf_actions_working_dir: "."
           tf_actions_comment: true
+          args: '-backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=omega-devops"'
         env:
           GITHUB_TOKEN: ${{ secrets.ghpat }}
       - name: "Terraform Plan"
@@ -42,6 +45,7 @@ jobs:
           tf_actions_subcommand: "plan"
           tf_actions_working_dir: "."
           tf_actions_comment: true
+          args: '-backend-config="token=${{ secrets.TF_API_TOKEN }}" -backend-config="organization=omega-devops"'
         env:
           TF_VAR_tenant_id: ${{ secrets.ARM_TENANT_ID}}
           TF_VAR_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID}}
