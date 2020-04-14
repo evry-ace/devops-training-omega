@@ -32,8 +32,8 @@ data "azurerm_resource_group" "rg" {
 }
 
 data "azurerm_virtual_network" "omegavnet" {
-    name = "omegaVnet"
-    resource_group_name = "devops-training-omega"
+  name                = "omegaVnet"
+  resource_group_name = "devops-training-omega"
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
@@ -42,7 +42,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   resource_group_name = data.azurerm_resource_group.rg.name
   dns_prefix          = "${var.prefix}-k8s"
 
-    default_node_pool {
+  default_node_pool {
     name       = "default"
     node_count = 2
     vm_size    = "Standard_B1ms"
